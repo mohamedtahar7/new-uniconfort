@@ -1,14 +1,14 @@
 import type { Metadata } from "next";
 import { Josefin_Sans } from "next/font/google";
-import "./globals.css";
-import Navbar from "@/components/main/Navbar";
-import CartProvider from "@/contexts/CartContext";
+import "../globals.css";
+import AdminNavbar from "@/components/admin/AdminNavbar";
 
 const josephin = Josefin_Sans({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Uniconfort - Your Furniture Choice",
-  description: "",
+  title: "Uniconfort - Admin Dashboard",
+  description:
+    "Admin dashboard for the E-commerce Store of Uniconfort Furniture",
 };
 
 export default function RootLayout({
@@ -19,7 +19,10 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={josephin.className}>
-        <CartProvider>{children}</CartProvider>
+        <main className="flex items-start">
+          <AdminNavbar />
+          {children}
+        </main>
       </body>
     </html>
   );
