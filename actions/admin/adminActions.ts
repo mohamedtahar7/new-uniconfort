@@ -21,16 +21,3 @@ export async function getProducts() {
     console.log(error);
   }
 }
-export async function getProductByName(title: string) {
-  try {
-    const product = await db.product.findUnique({
-      where: {
-        name: title,
-      },
-    });
-    return product;
-  } catch (error) {
-    alert("something went wrong!");
-    console.log(error);
-  }
-}
