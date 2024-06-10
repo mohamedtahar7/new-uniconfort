@@ -9,6 +9,7 @@ import { FiMenu } from "react-icons/fi";
 import Image from "next/image";
 import logo from "../../assets/LOGO-VIDE-2.png";
 import { CartContext } from "@/contexts/CartContext";
+import CartItem from "./CartItem";
 const Navbar = () => {
   const [activeNav, setActiveNav] = useState(false);
   const [scrolledNav, setScrolledNav] = useState(false);
@@ -136,7 +137,7 @@ const Navbar = () => {
       >
         <div className="py-8 px-8 flex justify-between items-center text-zinc-900">
           <h3 className="text-2xl font-medium text-zinc-900">
-            Shopping Cart ({itemAmount})
+            Panier ({itemAmount})
           </h3>
           <div className="flex items-center gap-4">
             <Button
@@ -159,27 +160,30 @@ const Navbar = () => {
           Total : {total}.00 DZD{" "}
         </h4>
         <div className="overflow-y-auto">
-          {/* {cart.map((item, index) => (
-                <CartItem item={item} key={index} />
-              ))} */}
+          {cart.map((item, index) => (
+            <CartItem item={item} key={index} />
+          ))}
         </div>
-        {/* {itemAmount > 0 && (
-              <div className="px-4 py-4 flex flex-col gap-3 absolute -bottom-50 left-0 right-0">
-                <p
-                  className="w-full cursor-pointer py-4 px-2 text-center text-xl font-medium text-[#051118] bg-[#fff]"
-                  onClick={() => setActiveCart(false)}
-                >
-                  Continuer Vos Achats
-                </p>
-                <Link
-                  to={"/checkout"}
-                  onClick={() => window.scrollTo(0, 0)}
-                  className="w-full py-4 px-2 text-center text-xl font-medium text-white bg-[#051118]"
-                >
-                  Commander
-                </Link>
-              </div>
-            )} */}
+        {itemAmount > 0 && (
+          <div className="px-4 py-4 flex flex-col gap-3 absolute -bottom-50 left-0 right-0">
+            <Button
+              variant={"outline"}
+              className="w-full cursor-pointer py-6 text-center text-xl font-medium"
+              onClick={() => setActiveCart(false)}
+            >
+              Continuer Vos Achats
+            </Button>
+            <Link
+              href={"/order"}
+              onClick={() => window.scrollTo(0, 0)}
+              className="w-full"
+            >
+              <Button className="w-full py-6 text-xl font-medium">
+                Commander
+              </Button>
+            </Link>
+          </div>
+        )}
       </div>
     </header>
   );

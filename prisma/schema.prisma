@@ -21,3 +21,11 @@ model Product {
   description String
   images String[]
 }
+model Order {
+  id    String @id @default(auto()) @map("_id") @db.ObjectId
+  clientName String
+  clientEmail String
+  clientTel String
+  clientWilaya String
+  clientAdress String
+}
