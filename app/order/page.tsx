@@ -28,8 +28,11 @@ const page = () => {
               Total: {total}.00 DZD
             </h1>
             <div className="flex flex-col gap-3">
-              {cart.map((item, index) => (
-                <div className="flex items-start gap-4 py-3 border-y-[1.5px] border-[#e1e1e1]">
+              {cart.map((item: any, index: any) => (
+                <div
+                  key={index}
+                  className="flex items-start gap-4 py-3 border-y-[1.5px] border-[#e1e1e1]"
+                >
                   <div
                     className="h-[160px] w-[160px] rounded-xl bg-no-repeat bg-center bg-cover"
                     style={{ backgroundImage: `url(${item.images[0]})` }}

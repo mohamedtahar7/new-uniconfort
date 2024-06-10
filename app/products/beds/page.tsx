@@ -8,7 +8,7 @@ const page = () => {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
   const fetchProducts = async () => {
-    const pros = await getProducts();
+    const pros: any = await getProducts();
     setProducts(pros);
   };
   useEffect(() => {
@@ -23,14 +23,14 @@ const page = () => {
         </div>
       ) : (
         <div className=" grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
-          {products.filter((product) => product.category === "Lits").length ===
-          0 ? (
+          {products.filter((product: any) => product.category === "Lits")
+            .length === 0 ? (
             <h1 className="text-center font-semibold text-2xl">
               No Products Found
             </h1>
           ) : (
             products
-              .filter((product) => product.category === "Lits")
+              .filter((product: any) => product.category === "Lits")
               .map((product, id) => <ProductCard key={id} product={product} />)
           )}
         </div>

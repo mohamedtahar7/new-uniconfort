@@ -160,7 +160,7 @@ const Navbar = () => {
           Total : {total}.00 DZD{" "}
         </h4>
         <div className="overflow-y-auto">
-          {cart.map((item, index) => (
+          {cart.map((item:any, index:any) => (
             <CartItem item={item} key={index} />
           ))}
         </div>
