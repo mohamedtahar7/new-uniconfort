@@ -21,6 +21,15 @@ model Product {
   description String
   images String[]
 }
+type OrderProduct {
+  id String
+  amount Int
+  name String
+  price Int
+  category String
+  description String
+  images String[]
+}
 model Order {
   id    String @id @default(auto()) @map("_id") @db.ObjectId
   clientName String
@@ -28,4 +37,5 @@ model Order {
   clientTel String
   clientWilaya String
   clientAdress String
+  clientOrder OrderProduct[]
 }

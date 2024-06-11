@@ -4,7 +4,7 @@ import { AiOutlinePlus } from "react-icons/ai";
 import { HiMinus } from "react-icons/hi";
 import { CgClose } from "react-icons/cg";
 interface CartItemProps {
-  item: object;
+  item: any;
 }
 const CartItem = ({ item }: CartItemProps) => {
   const { itemAmount, removeFromCart, increaseAmount, decreaseAmount } =
@@ -43,7 +43,7 @@ const CartItem = ({ item }: CartItemProps) => {
           <div className="flex flex-col gap-3 mt-3">
             <p className="text-md text-[#11334f]">
               <span className="text-lg text-[#11334f]">Prix Unitaire : </span>
-              {item.price} DZD
+              {item.price}.00 DZD
             </p>
             <p className="text-md text-[#11334f]">
               <span className="text-lg text-[#11334f]">Total : </span>

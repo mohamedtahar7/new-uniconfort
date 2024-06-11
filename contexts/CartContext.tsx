@@ -4,8 +4,19 @@ const getInitialCart = () => {
   const cart = localStorage.getItem("cart");
   return cart ? JSON.parse(cart) : [];
 };
-export const CartContext = createContext();
-const CartProvider = ({ children }: any) => {
+type CartContextType = {
+  addToCart: any;
+  clearCart: any;
+  removeFromCart: any;
+  increaseAmount: any;
+  decreaseAmount: any;
+  cart: any;
+  itemAmount: any;
+  total: any;
+  setTotal: any;
+};
+export const CartContext = createContext<CartContextType>();
+const CartProvider = ({ children }: { children: React.ReactNode }) => {
   const [cart, setCart] = useState(getInitialCart);
   useEffect(() => {
     localStorage.setItem("cart", JSON.stringify(cart));

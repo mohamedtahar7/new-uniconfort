@@ -23,14 +23,14 @@ const page = () => {
         </div>
       ) : (
         <div className=" grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
-          {products.filter((product: any) => product.category === "Tables")
+          {products?.filter((product: any) => product.category === "Tables")
             .length === 0 ? (
             <h1 className="text-center font-semibold text-2xl">
               No Products Found
             </h1>
           ) : (
             products
-              .filter((product: any) => product.category === "Tables")
+              ?.filter((product: any) => product.category === "Tables")
               .map((product, id) => <ProductCard key={id} product={product} />)
           )}
         </div>

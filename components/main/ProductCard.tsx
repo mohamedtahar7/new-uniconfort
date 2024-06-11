@@ -7,7 +7,7 @@ import { useContext } from "react";
 import { CartContext } from "@/contexts/CartContext";
 import { Toaster, toast } from "sonner";
 interface ProductCardProps {
-  product: object;
+  product: any;
 }
 const ProductCard = ({ product }: ProductCardProps) => {
   const { addToCart } = useContext(CartContext);

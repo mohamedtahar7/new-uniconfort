@@ -20,6 +20,8 @@ const Navbar = () => {
       window.scrollY > 60 ? setScrolledNav(true) : setScrolledNav(false);
     });
   }, []);
+  console.log(cart);
+
   return (
     <header
       className={`fixed transition z-40 w-full ${
@@ -160,7 +162,7 @@ const Navbar = () => {
           Total : {total}.00 DZD{" "}
         </h4>
         <div className="overflow-y-auto">
-          {cart.map((item:any, index:any) => (
+          {cart.map((item: any, index: any) => (
             <CartItem item={item} key={index} />
           ))}
         </div>
