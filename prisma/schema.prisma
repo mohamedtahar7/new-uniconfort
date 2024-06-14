@@ -28,6 +28,7 @@ type OrderProduct {
   price Int
   category String
   description String
+  size String?
   images String[]
 }
 model Order {
