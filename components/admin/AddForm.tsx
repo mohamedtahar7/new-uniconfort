@@ -25,7 +25,9 @@ const AddForm = () => {
   const [image2, setImage2] = useState("");
   const [loading, setLoading] = useState(false);
   const { toast } = useToast();
+  const id = `${name}`;
   const handleSubmit = async (
+    id: string,
     n: string,
     p: number,
     c: string,
@@ -36,6 +38,7 @@ const AddForm = () => {
     setLoading(true);
     const images = [img1, img2];
     const product = {
+      id,
       name: n,
       price: p,
       category: c,
@@ -60,7 +63,15 @@ const AddForm = () => {
         <form
           onSubmit={(e) => {
             e.preventDefault();
-            handleSubmit(name, price, category, description, image1, image2);
+            handleSubmit(
+              id,
+              name,
+              price,
+              category,
+              description,
+              image1,
+              image2
+            );
           }}
           className="flex flex-col gap-3"
         >
