@@ -21,3 +21,14 @@ export async function getProducts() {
     console.log(error);
   }
 }
+export async function deleteProduct(id: any) {
+  try {
+    const deletedProduct = await db.product.delete({
+      where: {
+        id: id,
+      },
+    });
+  } catch (error) {
+    console.log(error);
+  }
+}
