@@ -15,7 +15,18 @@ type CartContextType = {
   total: any;
   setTotal: any;
 };
-export const CartContext = createContext<CartContextType>();
+const defaultCartValues: CartContextType = {
+  addToCart: () => {},
+  clearCart: () => {},
+  removeFromCart: () => {},
+  increaseAmount: () => {},
+  decreaseAmount: () => {},
+  cart: [],
+  itemAmount: 0,
+  total: 0,
+  setTotal: () => {},
+};
+export const CartContext = createContext<CartContextType>(defaultCartValues);
 const CartProvider = ({ children }: { children: React.ReactNode }) => {
   const [cart, setCart] = useState(getInitialCart);
   useEffect(() => {
