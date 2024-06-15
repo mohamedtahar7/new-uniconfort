@@ -15,7 +15,9 @@ const OrderForm = () => {
   const [wilaya, setWilaya] = useState("");
   const [adress, setAdress] = useState("");
   const [loading, setLoading] = useState(false);
+  const id = `${name}`;
   const handleSubmit = async (
+    id: string,
     n: string,
     e: string,
     t: string,
@@ -25,6 +27,7 @@ const OrderForm = () => {
   ) => {
     setLoading(true);
     const order = {
+      id,
       clientName: n,
       clientEmail: e,
       clientTel: t,
@@ -47,7 +50,7 @@ const OrderForm = () => {
     <form
       onSubmit={(e) => {
         e.preventDefault();
-        handleSubmit(name, email, tel, wilaya, adress, cart);
+        handleSubmit(id, name, email, tel, wilaya, adress, cart);
       }}
       className="flex flex-col gap-3"
     >
