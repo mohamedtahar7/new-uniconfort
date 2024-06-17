@@ -1,9 +1,9 @@
 "use client";
 import { createContext, useState, useEffect } from "react";
-const getInitialCart = () => {
-  const cart = localStorage.getItem("cart");
-  return cart ? JSON.parse(cart) : [];
-};
+// const getInitialCart = () => {
+//   const cart = localStorage.getItem("cart");
+//   return cart ? JSON.parse(cart) : [];
+// };
 type CartContextType = {
   addToCart: any;
   clearCart: any;
@@ -28,10 +28,10 @@ const defaultCartValues: CartContextType = {
 };
 export const CartContext = createContext<CartContextType>(defaultCartValues);
 const CartProvider = ({ children }: { children: React.ReactNode }) => {
-  const [cart, setCart] = useState(getInitialCart);
-  useEffect(() => {
-    localStorage.setItem("cart", JSON.stringify(cart));
-  }, [cart]);
+  const [cart, setCart] = useState<any>([]);
+  // useEffect(() => {
+  //   localStorage.setItem("cart", JSON.stringify(cart));
+  // }, [cart]);
   const [itemAmount, setItemAmount] = useState(0);
   // total price state
   const [total, setTotal] = useState(0);
