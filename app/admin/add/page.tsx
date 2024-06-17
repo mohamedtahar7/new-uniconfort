@@ -1,3 +1,4 @@
+"use client";
 import AddForm from "@/components/admin/AddForm";
 import React from "react";
 
