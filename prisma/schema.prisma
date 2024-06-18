@@ -10,7 +10,7 @@ generator client {
 
 datasource db {
   provider = "mongodb"
-  url      = "mongodb+srv://taharatallahx7:uniconfortstore@cluster0.8zpmlp7.mongodb.net/UniconfortDatabase"
+  url      = env("DATABASE_URL")
 }
 
 model Product {
