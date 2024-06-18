@@ -16,7 +16,7 @@ const page = () => {
     setLoading(false);
   }, []);
   return (
-    <main className="px-[5%] py-[10%]">
+    <main className="px-[5%] py-[25%] md:py-[10%]">
       {loading ? (
         <div className="flex items-center justify-center">
           <Spinner d="10" />

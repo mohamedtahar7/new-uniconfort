@@ -1,42 +1,37 @@
-import React from "react";
-import heroImg from "../../assets/pexels-pixabay-276583-removebg-preview.png";
-import Image from "next/image";
-import { Button } from "../ui/button";
+"use client";
+import { motion } from "framer-motion";
 import Link from "next/link";
 const Hero = () => {
   return (
     <section
       id="hero"
-      className="overflow-y-hidden py-[10%] px-[5%] bg-zinc-100 h-screen"
+      className='sm:py-80 py-36 lg:py-48 xl:py-56 2xl:py-96 px-20 bg-[url("https://i.postimg.cc/BbZkmg6Q/home-bg2.jpg")] bg-no-repeat bg-center bg-cover bg-fixed h-[100vh] w-full'
     >
-      {/* Text */}
-      <main className="flex items-center justify-between">
-        <div className="flex flex-col justify-start gap-6">
-          <h1 className="text-5xl font-bold">This Is The Header</h1>
-          <p className="w-[80%] text-xl font-normal">
-            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Placeat,
-            magni tenetur consequatur enim id eum maiores. Iste aliquid, at
-            ipsum, in cupiditate maxime architecto autem pariatur quos quia quae
-            delectus.
-          </p>
-          <Link
-            href={"/"}
-            className="bg-gradient-to-r text-md from-[#11334f] to-sky-800 text-slate-100 py-2 px-4 rounded-xl w-fit transition hover:opacity-80"
-          >
-            Browse Products
-          </Link>
-        </div>
-        {/* IMG */}
-        <div>
-          <img
-            className="rounded-full"
-            src={
-              "https://i.pinimg.com/originals/0c/37/4f/0c374f8f2c40ade912ebdf5955b7f672.jpg"
-            }
-            alt="hero image"
-          />
-        </div>
-      </main>
+      <div className="bg-black absolute top-0 left-0 opacity-[48%] h-screen w-full" />
+      <div className="text-center left-0 absolute lg:-mt-8">
+        <motion.h1
+          whileInView={{ x: 0, opacity: 100 }}
+          initial={{ x: -50, opacity: 0 }}
+          transition={{ delay: 0.2, duration: 1 }}
+          className="md:text-8xl text-[2.8rem] text-[#eee] stroke-white font-semibold mb-12"
+        >
+          Découvrez l'élégance intemporelle
+        </motion.h1>
+        <motion.p
+          whileInView={{ x: 0, opacity: 100 }}
+          initial={{ x: -50, opacity: 0 }}
+          transition={{ delay: 0.5, duration: 1 }}
+          className="text-[#eee] mb-12 md:text-2xl text-xl font-medium"
+        >
+          Transformez votre espace avec notre collection de meubles exquis..
+        </motion.p>
+        <Link
+          href="#products"
+          className="cursor-pointer md:text-xl text-lg font-medium py-3 hover:bg-[#11334f] hover:border-none transition-all md:px-8 px-6 bg-none border-white border text-white"
+        >
+          Voir Nos Produits
+        </Link>
+      </div>
     </section>
   );
 };
