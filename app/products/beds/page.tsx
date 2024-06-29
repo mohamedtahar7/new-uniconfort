@@ -25,9 +25,9 @@ const page = () => {
         <div className=" grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
           {products?.filter((product: any) => product.category === "Lits")
             .length === 0 ? (
-            <h1 className="text-center font-semibold text-2xl">
-              No Products Found
-            </h1>
+            <div className="flex items-center justify-center">
+              <Spinner d="10" />
+            </div>
           ) : (
             products
               ?.filter((product: any) => product.category === "Lits")
