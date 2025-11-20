@@ -1,4 +1,5 @@
 import React from "react";
+import { FaTrash, FaCheckCircle } from "react-icons/fa";
 interface OrderCardProps {
   order: any;
 }
@@ -10,7 +11,17 @@ const OrderCard = ({ order }: OrderCardProps) => {
     return acc + currItem.amount;
   }, 0);
   return (
-    <div className="flex flex-col gap-4 w-full p-6 bg-gray-100 rounded-lg">
+    <div className="relative flex flex-col gap-4 w-full p-6 bg-gray-100 rounded-lg">
+      <div className="absolute flex items-center gap-3 -bottom-2 -right-2">
+        <FaCheckCircle
+          className="text-green-500 hover:opacity-80 transition cursor-pointer"
+          size={30}
+        />
+        <FaTrash
+          className="text-red-500 hover:opacity-80 transition cursor-pointer"
+          size={30}
+        />
+      </div>
       <div className="flex items-start justify-between">
         <div className="border-r-[1px] border-gray-100">
           <h2>Client: {order.clientName}</h2>
@@ -36,7 +47,6 @@ const OrderCard = ({ order }: OrderCardProps) => {
           ))}
         </div>
       </div>
-      <div className="absolute bottom-0 right-4">Tahar</div>
     </div>
   );
 };

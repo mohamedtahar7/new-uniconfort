@@ -15,7 +15,7 @@ const page = () => {
   useEffect(() => {
     fetchProducts();
     setLoading(false);
-  }, []);
+  }, [products]);
   return (
     <main className="pl-[25%] py-[5%]">
       {loading ? (

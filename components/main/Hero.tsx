@@ -8,7 +8,7 @@ const Hero = () => {
       className='sm:py-80 py-36 lg:py-48 xl:py-56 2xl:py-96 px-20 bg-[url("https://i.postimg.cc/BbZkmg6Q/home-bg2.jpg")] bg-no-repeat bg-center bg-cover bg-fixed h-[100vh] w-full'
     >
       <div className="bg-black absolute top-0 left-0 opacity-[48%] h-screen w-full" />
-      <div className="text-center left-0 absolute lg:-mt-8">
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-center">
         <motion.h1
           whileInView={{ x: 0, opacity: 100 }}
           initial={{ x: -50, opacity: 0 }}

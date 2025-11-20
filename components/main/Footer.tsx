@@ -30,12 +30,12 @@ const Footer = () => {
             <FaPhoneAlt size={25} className="text-[#eee]" />
             <h4 className="text-lg text-[#eee]">+213 558 78 92 91</h4>
           </div>
-          <div className="flex items-center gap-3 mt-3">
+          {/* <div className="flex items-center gap-3 mt-3">
             <LuMail size={25} className="text-[#eee]" />
             <h4 className="text-lg text-[#eee]">
               contact@uniconfortmeuble.store
             </h4>
-          </div>
+          </div> */}
         </div>
         <div className="flex pt-4 flex-col gap-6">
           <h3 className="text-[#eee] text-xl font-semibold">Réseaux Sociaux</h3>

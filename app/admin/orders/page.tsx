@@ -16,10 +16,10 @@ const page = () => {
   useEffect(() => {
     fetchOrders();
     setLoading(false);
-  }, []);
+  }, [orders]);
   return (
     <main className="px-[20%] py-[2%]">
-      <div className="flex flex-col gap-3 w-[80vw] px-[5%]">
+      <div className="flex flex-col gap-5 w-[80vw] px-[5%]">
         {loading ? (
           <div className="flex items-center justify-center">
             <Spinner d="10" />
