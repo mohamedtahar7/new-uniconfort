@@ -15,16 +15,30 @@ import { Button } from "../ui/button";
 import Spinner from "../ui/Spinner";
 import { addProduct } from "@/actions/admin/adminActions";
 import { useToast } from "../ui/use-toast";
-
+import axios from "axios";
 const AddForm = () => {
   const [name, setName] = useState("");
   const [price, setPrice] = useState(0);
   const [description, setDescription] = useState("");
   const [category, setCategory] = useState("");
-  const [image1, setImage1] = useState("");
-  const [image2, setImage2] = useState("");
+  const [image1, setImage1] = useState<File | null>(null);
+  const [image2, setImage2] = useState<File | null>(null);
   const [loading, setLoading] = useState(false);
   const { toast } = useToast();
+  const uploadImg = async (img: any) => {
+    const data = new FormData();
+    data.append("file", img);
+    data.append("upload_preset", "uniconfort_preset");
+    try {
+      let api = `https://api.cloudinary.com/v1_1/dlzmmzpkw/image/upload`;
+      const res = await axios.post(api, data);
+      const { secure_url } = res.data;
+      console.log(secure_url);
+      return secure_url;
+    } catch (error) {
+      alert(error);
+    }
+  };
   const id = `${name}`;
   const handleSubmit = async (
     id: string,
@@ -32,11 +46,13 @@ const AddForm = () => {
     p: number,
     c: string,
     d: string,
-    img1: string,
-    img2: string
+    img1: any,
+    img2: any
   ) => {
     setLoading(true);
-    const images = [img1, img2];
+    let imgLink1 = await uploadImg(img1);
+    let imgLink2 = await uploadImg(img2);
+    const images = [imgLink1, imgLink2];
     const product = {
       id,
       name: n,
@@ -121,17 +137,23 @@ const AddForm = () => {
           <Input
             required
             className="cursor-pointer"
-            type="text"
+            type="file"
             placeholder="Image 1"
-            value={image1}
-            onChange={(e) => setImage1(e.target.value)}
+            onChange={(e) => {
+              if (e.target.files && e.target.files[0]) {
+                setImage1(e.target.files[0]);
+              }
+            }}
           />
           <Input
             required
-            value={image2}
-            onChange={(e) => setImage2(e.target.value)}
+            onChange={(e) => {
+              if (e.target.files && e.target.files[0]) {
+                setImage2(e.target.files[0]);
+              }
+            }}
             className="cursor-pointer"
-            type="text"
+            type="file"
             placeholder="Image 2"
           />
           <Button
