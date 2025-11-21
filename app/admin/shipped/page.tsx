@@ -1,5 +1,5 @@
 "use client";
-import { getUnconfirmedOrders } from "@/actions/main/clientsActions";
+import { getShippedOrders } from "@/actions/main/clientsActions";
 import OrderCard from "@/components/admin/OrderCard";
 import Spinner from "@/components/ui/Spinner";
 import React, { useEffect, useState } from "react";
@@ -10,7 +10,7 @@ const page = () => {
   const [total, setTotal] = useState(0);
   const [amount, setAmount] = useState(0);
   const fetchOrders = async () => {
-    const ords: any = await getUnconfirmedOrders();
+    const ords: any = await getShippedOrders();
     setOrders(ords);
   };
   useEffect(() => {
@@ -22,7 +22,7 @@ const page = () => {
       <div className="flex flex-col gap-5 w-[80vw] px-[5%]">
         {orders.length === 0 && (
           <h1 className="text-center text-2xl font-medium">
-            There's no new Orders
+            There's no shipped Orders
           </h1>
         )}
         {loading ? (

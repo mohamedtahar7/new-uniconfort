@@ -18,6 +18,11 @@ const page = () => {
   }, [products]);
   return (
     <main className="pl-[25%] py-[5%]">
+      {products.length === 0 && (
+        <h1 className="text-center text-2xl font-medium">
+          There's no new Orders
+        </h1>
+      )}
       {loading ? (
         <div className="flex items-center justify-center">
           <Spinner d="10" />

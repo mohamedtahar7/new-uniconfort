@@ -33,6 +33,7 @@ const OrderForm = () => {
       clientTel: t,
       clientWilaya: w,
       clientAdress: a,
+      orderState: "Not Confirmed",
       clientOrder: o,
     };
     try {

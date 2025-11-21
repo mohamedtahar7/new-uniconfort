@@ -38,5 +38,6 @@ model Order {
   clientTel String
   clientWilaya String
   clientAdress String
+  orderState String
   clientOrder OrderProduct[]
 }
