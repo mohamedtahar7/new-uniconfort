@@ -4,7 +4,7 @@ import React from "react";
 const page = () => {
   return (
     <main className="">
-      <div className="px-[20%]">
+      <div className="">
         <AddForm />
       </div>
     </main>

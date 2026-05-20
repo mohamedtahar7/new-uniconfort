@@ -32,3 +32,24 @@ export async function deleteProduct(id: any) {
     console.log(error);
   }
 }
+export async function updateProduct(
+  id: string,
+  data: Partial<Omit<Product, "id">>,
+) {
+  try {
+    const updated = await db.product.update({
+      where: { id: id },
+      data: {
+        name: data.name,
+        price: data.price,
+        category: data.category,
+        description: data.description,
+        images: data.images,
+      },
+    });
+    return updated;
+  } catch (error) {
+    console.error("Prisma error modifying product data:", error);
+    throw new Error("Impossible de mettre à jour le produit");
+  }
+}
