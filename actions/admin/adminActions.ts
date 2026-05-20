@@ -53,3 +53,46 @@ export async function updateProduct(
     throw new Error("Impossible de mettre à jour le produit");
   }
 }
+export async function getDashboardMetrics() {
+  try {
+    // 1. Fetch unconfirmed orders count
+    const unconfirmedCount = await db.order.count({
+      where: { orderState: "Not Confirmed" },
+    });
+
+    // 2. Fetch all successful orders to calculate real revenue
+    // (Adjust 'Confirmed' or 'Shipped' based on what you count as completed revenue)
+    const completedOrders = await db.order.findMany({
+      where: {
+        orderState: { in: ["Confirmed", "Shipped"] },
+      },
+      include: {
+        clientOrder: true, // Includes items array to get prices and amounts
+      },
+    });
+
+    // Calculate total revenue from real item sales
+    const totalRevenue = completedOrders.reduce((acc, order) => {
+      const orderTotal = order.clientOrder.reduce((sum: number, item: any) => {
+        return sum + item.amount * item.price;
+      }, 0);
+      return acc + orderTotal;
+    }, 0);
+
+    // 3. Get total active catalog products count
+    const productsCount = await db.product.count();
+
+    return {
+      unconfirmedCount,
+      totalRevenue,
+      productsCount,
+    };
+  } catch (error) {
+    console.error("Error generating dashboard counters:", error);
+    return {
+      unconfirmedCount: 0,
+      totalRevenue: 0,
+      productsCount: 0,
+    };
+  }
+}

@@ -1,42 +1,49 @@
-import type { Metadata } from "next";
-import { Josefin_Sans } from "next/font/google";
-import "../globals.css";
+"use client";
+import React, { createContext, useContext, useState } from "react";
+// Import your sidebar component here (adjust path if needed)
 import AdminNavbar from "@/components/admin/AdminNavbar";
-import { Toaster } from "sonner"; // Centered global toast mounting space
 
-const josephin = Josefin_Sans({ subsets: ["latin"] });
+// Create a simple login state context
+const AuthContext = createContext({
+  isAuthenticated: false,
+  login: () => {},
+});
 
-export const metadata: Metadata = {
-  title: "Uniconfort - Admin Dashboard",
-  description:
-    "Admin dashboard for the E-commerce Store of Uniconfort Furniture",
-};
-
-export default function RootLayout({
+export default function AdminLayout({
   children,
-}: Readonly<{
+}: {
   children: React.ReactNode;
-}>) {
-  return (
-    <html lang="fr" className="h-full bg-slate-50/50">
-      <body
-        className={`${josephin.className} h-full antialiased text-[#0D2B45]`}
-      >
-        <div className="flex flex-col lg:flex-row min-h-screen relative w-full">
-          {/* Dashboard Navigation Control Sidebar */}
-          <AdminNavbar />
+}) {
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
 
-          {/* Dashboard Viewport Core Render Frame Workspace */}
-          <main className="flex-1 w-full pt-24 lg:pt-0 lg:pl-64 xl:pl-72 min-h-screen transition-all duration-300">
-            <div className="p-4 md:p-8 lg:p-12 max-w-[1600px] mx-auto w-full">
-              {children}
-            </div>
-          </main>
+  const login = () => setIsAuthenticated(true);
+
+  // IF NOT LOGGED IN: Render ONLY the page content (the login form) - No Sidebar!
+  if (!isAuthenticated) {
+    return (
+      <AuthContext.Provider value={{ isAuthenticated, login }}>
+        <div className="min-h-screen bg-[#FBFBFB]">{children}</div>
+      </AuthContext.Provider>
+    );
+  }
+
+  // IF LOGGED IN: Render the complete dashboard dashboard workspace with the sidebar layout
+  return (
+    <AuthContext.Provider value={{ isAuthenticated, login }}>
+      <div className="min-h-screen flex bg-[#FBFBFB]">
+        {/* Sidebar Navigation */}
+        <div className="fixed inset-y-0 left-0 w-64 z-30">
+          <AdminNavbar />
         </div>
 
-        {/* Global Toast Component Context Anchor */}
-        <Toaster richColors closeButton position="top-right" />
-      </body>
-    </html>
+        {/* Main Content Workspace Frame */}
+        <div className="flex-1 lg:pl-64 min-w-0">
+          <main className="p-8 max-w-7xl mx-auto">{children}</main>
+        </div>
+      </div>
+    </AuthContext.Provider>
   );
 }
+
+// Custom hook to quickly call auth inside child views
+export const useAdminAuth = () => useContext(AuthContext);
