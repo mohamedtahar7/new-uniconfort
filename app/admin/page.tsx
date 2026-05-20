@@ -1,6 +1,6 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import { useAdminAuth } from "./layout";
+import { useAdminAuth } from "./useAdminAuth";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { toast } from "sonner";
@@ -176,7 +176,7 @@ const Page = () => {
               </span>
               <Input
                 type="text"
-                placeholder="Ex: mehdi1994"
+                placeholder="username"
                 value={username}
                 onChange={(e) => setUsername(e.target.value)}
                 className="pl-10 h-11 border-slate-200 text-xs rounded-sm focus:ring-1 focus:ring-[#0D2B45] focus:border-[#0D2B45]"
