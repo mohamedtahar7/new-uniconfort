@@ -41,7 +41,7 @@ const Footer = () => {
 
         {/* Subtle Region Mark */}
         <p className="text-[10px] text-white/40 tracking-[0.4em] uppercase font-medium hidden md:block">
-          Biskra — Algérie
+          Alger — Algérie
         </p>
       </div>
     </footer>

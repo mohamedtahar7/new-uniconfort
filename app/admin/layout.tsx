@@ -2,6 +2,7 @@
 import React from "react";
 import AdminNavbar from "@/components/admin/AdminNavbar";
 import { AdminAuthProvider, useAdminAuth } from "./useAdminAuth";
+import { Toaster } from "sonner";
 
 // We create an internal layout template view inside the provider layer
 function LayoutContent({ children }: { children: React.ReactNode }) {
@@ -9,7 +10,12 @@ function LayoutContent({ children }: { children: React.ReactNode }) {
 
   // IF NOT LOGGED IN: Render ONLY the page view form framework
   if (!isAuthenticated) {
-    return <div className="min-h-screen bg-[#FBFBFB]">{children}</div>;
+    return (
+      <div className="min-h-screen bg-[#FBFBFB]">
+        <Toaster position="bottom-right" />
+        {children}
+      </div>
+    );
   }
 
   // IF LOGGED IN: Render the complete dashboard dashboard workspace with the sidebar layout
@@ -36,7 +42,10 @@ export default function AdminLayout({
 }) {
   return (
     <AdminAuthProvider>
-      <LayoutContent>{children}</LayoutContent>
+      <LayoutContent>
+        <Toaster position="bottom-right" />
+        {children}
+      </LayoutContent>
     </AdminAuthProvider>
   );
 }

@@ -1,11 +1,8 @@
 "use client";
 import { createContext, useState, useEffect } from "react";
-// const getInitialCart = () => {
-//   const cart = localStorage.getItem("cart");
-//   return cart ? JSON.parse(cart) : [];
-// };
+
 type CartContextType = {
-  addToCart: any;
+  addToCart: (product: any, id: any, quantity?: number) => void;
   clearCart: any;
   removeFromCart: any;
   increaseAmount: any;
@@ -15,6 +12,7 @@ type CartContextType = {
   total: any;
   setTotal: any;
 };
+
 const defaultCartValues: CartContextType = {
   addToCart: () => {},
   clearCart: () => {},
@@ -26,33 +24,23 @@ const defaultCartValues: CartContextType = {
   total: 0,
   setTotal: () => {},
 };
+
 export const CartContext = createContext<CartContextType>(defaultCartValues);
+
 const CartProvider = ({ children }: { children: React.ReactNode }) => {
   const [cart, setCart] = useState<any>([]);
-  // useEffect(() => {
-  //   localStorage.setItem("cart", JSON.stringify(cart));
-  // }, [cart]);
   const [itemAmount, setItemAmount] = useState(0);
-  // total price state
   const [total, setTotal] = useState(0);
-  // useEffect(()=>{
-  //   const data = localStorage.getItem('my-cart')
-  //   if(data) {
-  //     setCart(JSON.parse(data))
-  //   }
-  // },[])
-  // useEffect(()=>{
-  //   localStorage.setItem('my-cart',JSON.stringify(cart))
-  // },[cart]);
 
-  // update Total
+  // Update Total
   useEffect(() => {
     const total = cart.reduce((acc: any, item: any) => {
       return acc + item.amount * item.price;
     }, 0);
     setTotal(total);
-  });
-  // update item amount
+  }, [cart]); // Added dependency array here to stop infinite re-renders
+
+  // Update item amount
   useEffect(() => {
     if (cart) {
       const amount = cart.reduce((acc: number, currItem: any) => {
@@ -61,15 +49,19 @@ const CartProvider = ({ children }: { children: React.ReactNode }) => {
       setItemAmount(amount);
     }
   }, [cart]);
-  const addToCart = (product: any, id: any) => {
-    const newItem = { ...product, amount: 1 };
-    // check if the item already in the cart
+
+  // Modified: Accepts an optional custom quantity increment parameter
+  const addToCart = (product: any, id: any, quantity: number = 1) => {
+    const newItem = { ...product, amount: quantity };
+
+    // Check if the item is already in the cart
     const cartItem = cart.find((item: any) => item.id === id);
-    // if the item already in the cart
+
+    // If the item is already in the cart, increment by the chosen quantity
     if (cartItem) {
       const newCart = [...cart].map((item) => {
         if (item.id === id) {
-          return { ...item, amount: cartItem.amount + 1 };
+          return { ...item, amount: cartItem.amount + quantity };
         } else {
           return item;
         }
@@ -79,17 +71,21 @@ const CartProvider = ({ children }: { children: React.ReactNode }) => {
       setCart([...cart, newItem]);
     }
   };
+
   const removeFromCart = (id: any) => {
     const newCart = cart.filter((item: any) => item.id !== id);
     setCart(newCart);
   };
+
   const clearCart = () => {
     setCart([]);
   };
+
   const increaseAmount = (id: any) => {
     const item = cart.find((item: any) => item.id === id);
-    addToCart(item, id);
+    addToCart(item, id, 1); // Pass 1 explicitly for structural clarity
   };
+
   const decreaseAmount = (id: any) => {
     const item = cart.find((item: any) => item.id === id);
     if (item) {
@@ -102,10 +98,11 @@ const CartProvider = ({ children }: { children: React.ReactNode }) => {
       });
       setCart(newCart);
     }
-    if (item.amount < 2) {
+    if (item && item.amount < 2) {
       removeFromCart(id);
     }
   };
+
   return (
     <CartContext.Provider
       value={{

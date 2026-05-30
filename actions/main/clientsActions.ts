@@ -97,3 +97,17 @@ export async function getUnconfirmedOrders() {
     console.log(error);
   }
 }
+
+export async function getProductById(id: string) {
+  try {
+    const product = await db.product.findUnique({
+      where: {
+        id: id,
+      },
+    });
+    return product;
+  } catch (error) {
+    console.error("Error fetching single product from database:", error);
+    return null;
+  }
+}
